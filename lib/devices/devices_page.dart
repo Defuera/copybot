@@ -1,3 +1,5 @@
+import 'package:bot/common/utils/navigation_utils.dart';
+import 'package:bot/new_device_wizard/wizard_page.dart';
 import 'package:flutter/material.dart';
 
 class DevicesPage extends StatefulWidget {
@@ -31,7 +33,7 @@ class _DevicesPageState extends State<DevicesPage> {
   }
 
   _buildAddDeviceButton(BuildContext context) => FloatingActionButton(
-//        onPressed: _incrementCounter,
+        onPressed: () => navigateTo(context, WizardPage()),
         tooltip: 'Increment',
         child: Icon(Icons.add),
         backgroundColor: Color(0xffEF9358),
