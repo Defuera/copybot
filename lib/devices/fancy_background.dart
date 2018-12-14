@@ -47,7 +47,7 @@ class _FancyBackgroundImpl extends AnimatedWidget {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: <Color>[darkColor, lightColor],
+              colors: <Color>[BotColors.darkColor, BotColors.lightColor],
             ),
           ),
         ),

@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        backgroundColor: bgColor,
+        scaffoldBackgroundColor: BotColors.bgColor,
         textTheme: textTheme,
       ),
       home: DevicesPage(),
