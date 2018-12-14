@@ -56,20 +56,23 @@ class _DevicesPageState extends State<DevicesPage> {
       height: BotDimens.actionButtonDiameter,
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
-        child: FloatingActionButton(
-          shape: CircleBorder(
-            side: BorderSide(
-              color: Colors.white,
-              width: 2.0,
+        child: Opacity(
+          opacity: 0.5,
+          child: FloatingActionButton(
+            shape: CircleBorder(
+              side: BorderSide(
+                color: Colors.white,
+                width: 2.0,
+              ),
             ),
+//          onPressed: () => navigateTo(context, WizardPage()),
+            tooltip: 'Increment',
+            child: Icon(
+              Icons.person_outline,
+              color: BotColors.orange,
+            ),
+            backgroundColor: Colors.white,
           ),
-          onPressed: () => navigateTo(context, WizardPage()),
-          tooltip: 'Increment',
-          child: Icon(
-            Icons.person_outline,
-            color: BotColors.orange,
-          ),
-          backgroundColor: Colors.white,
         ),
       ));
 
@@ -103,7 +106,7 @@ class _DevicesPageState extends State<DevicesPage> {
         onPressed: () {},
         backgroundColor: Colors.white,
         child: Transform.rotate(
-          angle:  degreesInRadian45,
+          angle: degreesInRadian45,
           child: Icon(
             Icons.add,
             size: 38.0,
