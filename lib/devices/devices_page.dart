@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bot/common/theme.dart';
 import 'package:bot/common/utils/navigation_utils.dart';
 import 'package:bot/devices/fancy_background.dart';
@@ -22,14 +24,10 @@ class _DevicesPageState extends State<DevicesPage> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   _buildAppBar(context),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'You have pushed the button this many times: 0',
-                        ),
-                      ],
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: _buildCancelButton(context),
                     ),
                   ),
                 ],
@@ -53,6 +51,7 @@ class _DevicesPageState extends State<DevicesPage> {
       );
 
   _buildProfileButton(BuildContext context) => SizedBox(
+      //todo inactive
       width: BotDimens.actionButtonDiameter,
       height: BotDimens.actionButtonDiameter,
       child: Padding(
@@ -67,7 +66,7 @@ class _DevicesPageState extends State<DevicesPage> {
           onPressed: () => navigateTo(context, WizardPage()),
           tooltip: 'Increment',
           child: Icon(
-            Icons.add,
+            Icons.person_outline,
             color: BotColors.orange,
           ),
           backgroundColor: Colors.white,
@@ -94,5 +93,24 @@ class _DevicesPageState extends State<DevicesPage> {
             backgroundColor: BotColors.orange,
           ),
         ));
+  }
+
+  _buildCancelButton(BuildContext context) {
+    var degreesInRadian45 = pi / 4.0;
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.white,
+        child: Transform.rotate(
+          angle:  degreesInRadian45,
+          child: Icon(
+            Icons.add,
+            size: 38.0,
+            color: BotColors.orange,
+          ),
+        ),
+      ),
+    );
   }
 }
