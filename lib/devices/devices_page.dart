@@ -11,7 +11,6 @@ class DevicesPage extends StatefulWidget {
 }
 
 class _DevicesPageState extends State<DevicesPage> {
-
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Stack(
@@ -25,7 +24,10 @@ class _DevicesPageState extends State<DevicesPage> {
                   iconTheme: IconThemeData(color: Colors.orange),
                   elevation: 0.0,
                   backgroundColor: Colors.transparent,
-                  title: Text("Let's add rnew device"),
+                  title: Text(
+                    "Let's add new device",
+                    style: Theme.of(context).textTheme.headline,
+                  ),
                   actions: <Widget>[
                     _buildAddDeviceButton(context),
                   ],

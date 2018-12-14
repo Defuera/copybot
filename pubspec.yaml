@@ -21,4 +21,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
+  assets:
+    - assets/
+  fonts:
+    - family: Veritas
+      fonts:
+        - asset: assets/fonts/veritas.ttf
