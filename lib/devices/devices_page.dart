@@ -6,6 +6,7 @@ import 'package:bot/common/utils/navigation_utils.dart';
 import 'package:bot/devices/devices_bloc.dart';
 import 'package:bot/devices/fancy_background.dart';
 import 'package:bot/new_device_wizard/wizard_page.dart';
+import 'package:bot/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -106,9 +107,10 @@ class _DevicesPageState extends State<DevicesPage> {
             }
           }(),
           child: FloatingActionButton(
+            heroTag: null,
             onPressed: () {
               if (enable) {
-                return () => navigateTo(context, WizardPage());
+                return () => Navigator.pushNamed(context, ProfilePage.route);
               } else {
                 return null;
               }
@@ -136,6 +138,7 @@ class _DevicesPageState extends State<DevicesPage> {
         child: Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: FloatingActionButton(
+            heroTag: null,
             shape: CircleBorder(
               side: BorderSide(
                 color: Colors.white,
@@ -155,7 +158,7 @@ class _DevicesPageState extends State<DevicesPage> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: FloatingActionButton(
-        onPressed: () => bloc.dispatch(Event(hideAddDevicesReveal: true)),
+        onPressed: () => bloc.dispatch(Event.HIDE_ADD_DEVICE_REVEAL),
         backgroundColor: Colors.white,
         child: Transform.rotate(
           angle: degreesInRadian45,

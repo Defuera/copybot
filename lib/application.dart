@@ -1,5 +1,6 @@
 import 'package:bot/common/theme.dart';
 import 'package:bot/devices/devices_page.dart';
+import 'package:bot/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: BotColors.bgColor,
         textTheme: textTheme,
       ),
-      home: DevicesPage(),
+      routes: {
+        '/': (context) => DevicesPage(),
+        ProfilePage.route: (context) => ProfilePage(),
+      },
     );
   }
 }
