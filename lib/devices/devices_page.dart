@@ -1,10 +1,13 @@
 import 'dart:math';
 
+import 'package:bot/common/models/device.dart';
 import 'package:bot/common/theme.dart';
 import 'package:bot/common/utils/navigation_utils.dart';
+import 'package:bot/devices/devices_bloc.dart';
 import 'package:bot/devices/fancy_background.dart';
 import 'package:bot/new_device_wizard/wizard_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DevicesPage extends StatefulWidget {
   DevicesPage({Key key}) : super(key: key);
@@ -14,35 +17,63 @@ class DevicesPage extends StatefulWidget {
 }
 
 class _DevicesPageState extends State<DevicesPage> {
+  final bloc = DevicesBloc();
+
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Scaffold(
-          body: Stack(
+  Widget build(BuildContext context) {
+    return BlocBuilder(
+        bloc: bloc,
+        builder: (BuildContext context, ViewModel viewModel) {
+          if (viewModel.showAddDevicesReveal) {
+            return _buildAddDeviceRevealState(context);
+          } else {
+            return _buildDefaultState(context, viewModel.devices);
+          }
+        });
+  }
+
+  Widget _buildDefaultState(BuildContext context, List<Device> devices) {
+    return Scaffold(
+      appBar: _buildAppBar(context, "My devices", Colors.black),
+      body: Column(
+        children: <Widget>[
+          Align(
+            alignment: Alignment.topCenter,
+            child: Text("Any device you add will be shown here"),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAddDeviceRevealState(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          FancyBackground(),
+          Column(
+            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              FancyBackground(),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  _buildAppBar(context),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: _buildCancelButton(context),
-                    ),
-                  ),
-                ],
+              _buildAppBar(context, "Let's add new device", Colors.white),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: _buildCancelButton(context),
+                ),
               ),
             ],
           ),
-        ),
-      );
+        ],
+      ),
+    );
+  }
 
-  AppBar _buildAppBar(BuildContext context) => AppBar(
+  AppBar _buildAppBar(BuildContext context, String title, Color titleColor) => AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         title: Text(
-          "Let's add new device",
-          style: Theme.of(context).textTheme.headline,
+          title,
+          style: Theme.of(context).textTheme.headline.apply(color: titleColor),
         ),
         actions: <Widget>[
           _buildProfileButton(context),
@@ -103,7 +134,7 @@ class _DevicesPageState extends State<DevicesPage> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => bloc.dispatch(Event(hideAddDevicesReveal: true)),
         backgroundColor: Colors.white,
         child: Transform.rotate(
           angle: degreesInRadian45,
