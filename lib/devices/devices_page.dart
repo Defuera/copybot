@@ -34,16 +34,16 @@ class _DevicesPageState extends State<DevicesPage> {
 
   Widget _buildDefaultState(BuildContext context, List<Device> devices) {
     return Scaffold(
-      appBar: _buildAppBar(context, title: "My devices", titleColor: Colors.black),
-      body: Column(
-        children: <Widget>[
+        appBar: _buildAppBar(context, title: "My devices", titleColor: Colors.black),
+        body: Column(children: <Widget>[
+          Image.asset("assets/images/list_empty.png"),
           Align(
-            alignment: Alignment.topCenter,
-            child: Text("Any device you add will be shown here"),
-          )
-        ],
-      ),
-    );
+              alignment: Alignment.topCenter,
+              child: Text(
+                "Any device you add will be shown here",
+                style: Theme.of(context).textTheme.body1,
+              )),
+        ]));
   }
 
   Widget _buildAddDeviceRevealState(BuildContext context) {
@@ -55,7 +55,10 @@ class _DevicesPageState extends State<DevicesPage> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               _buildAppBar(context,
-                  title: "Let's add new device", titleColor: Colors.white, enableProfileButton: false, showAddDeviceButtonBorder: true),
+                  title: "Let's add new device",
+                  titleColor: Colors.white,
+                  enableProfileButton: false,
+                  showAddDeviceButtonBorder: true),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,

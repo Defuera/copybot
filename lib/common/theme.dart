@@ -8,6 +8,9 @@ class BotColors {
   static final bgColor = Color(0xFFF9F9FB);
 
   static final orange = Color(0xFFFF7D25);
+
+  static final textGrey = Color(0xFF7A7E8F);
+
 }
 
 class BotDimens {
@@ -15,7 +18,7 @@ class BotDimens {
 }
 
 final textTheme = TextTheme(
-//  body1: TextStyle(color: Colors.white, fontSize: 15.0),
+  body1: TextStyle(color: BotColors.textGrey, fontSize: 14.0),
 //  title: TextStyle(color: Colors.white, fontSize: 28.0, fontWeight: FontWeight.bold),
   headline: TextStyle(
     color: Colors.white,
