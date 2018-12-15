@@ -34,7 +34,7 @@ class _DevicesPageState extends State<DevicesPage> {
 
   Widget _buildDefaultState(BuildContext context, List<Device> devices) {
     return Scaffold(
-      appBar: _buildAppBar(context, "My devices", Colors.black),
+      appBar: _buildAppBar(context, title: "My devices", titleColor: Colors.black),
       body: Column(
         children: <Widget>[
           Align(
@@ -54,7 +54,8 @@ class _DevicesPageState extends State<DevicesPage> {
           Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              _buildAppBar(context, "Let's add new device", Colors.white),
+              _buildAppBar(context,
+                  title: "Let's add new device", titleColor: Colors.white, enableProfileButton: false),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -68,7 +69,13 @@ class _DevicesPageState extends State<DevicesPage> {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context, String title, Color titleColor) => AppBar(
+  AppBar _buildAppBar(
+    BuildContext context, {
+    String title,
+    Color titleColor,
+    bool enableProfileButton: true,
+  }) =>
+      AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         title: Text(
@@ -76,27 +83,32 @@ class _DevicesPageState extends State<DevicesPage> {
           style: Theme.of(context).textTheme.headline.apply(color: titleColor),
         ),
         actions: <Widget>[
-          _buildProfileButton(context),
+          _buildProfileButton(context, enableProfileButton),
           _buildAddDeviceButton(context),
         ],
       );
 
-  _buildProfileButton(BuildContext context) => SizedBox(
-      //todo inactive
+  _buildProfileButton(BuildContext context, bool enable) => SizedBox(
       width: BotDimens.actionButtonDiameter,
       height: BotDimens.actionButtonDiameter,
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: Opacity(
-          opacity: 0.5,
+          opacity: () {
+            if (enable) {
+              return 1.0;
+            } else {
+              return 0.5;
+            }
+          }(),
           child: FloatingActionButton(
-            shape: CircleBorder(
-              side: BorderSide(
-                color: Colors.white,
-                width: 2.0,
-              ),
-            ),
-//          onPressed: () => navigateTo(context, WizardPage()),
+            onPressed: () {
+              if (enable) {
+                return () => navigateTo(context, WizardPage());
+              } else {
+                return null;
+              }
+            }(),
             tooltip: 'Increment',
             child: Icon(
               Icons.person_outline,
