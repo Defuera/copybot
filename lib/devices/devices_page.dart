@@ -55,7 +55,7 @@ class _DevicesPageState extends State<DevicesPage> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               _buildAppBar(context,
-                  title: "Let's add new device", titleColor: Colors.white, enableProfileButton: false),
+                  title: "Let's add new device", titleColor: Colors.white, enableProfileButton: false, showAddDeviceButtonBorder: true),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -74,6 +74,7 @@ class _DevicesPageState extends State<DevicesPage> {
     String title,
     Color titleColor,
     bool enableProfileButton: true,
+    bool showAddDeviceButtonBorder: false,
   }) =>
       AppBar(
         elevation: 0.0,
@@ -84,7 +85,7 @@ class _DevicesPageState extends State<DevicesPage> {
         ),
         actions: <Widget>[
           _buildProfileButton(context, enableProfileButton),
-          _buildAddDeviceButton(context),
+          _buildAddDeviceButton(context, showAddDeviceButtonBorder),
         ],
       );
 
@@ -119,8 +120,13 @@ class _DevicesPageState extends State<DevicesPage> {
         ),
       ));
 
-  _buildAddDeviceButton(BuildContext context) {
-    final borderSize = 6; //todo animate
+  _buildAddDeviceButton(BuildContext context, bool showBorder) {
+    final borderSize = () {
+      if (showBorder)
+        return 6.0;
+      else
+        return 0.0;
+    }(); //todo animate
     return SizedBox(
         width: BotDimens.actionButtonDiameter + borderSize,
         height: BotDimens.actionButtonDiameter + borderSize,
@@ -130,7 +136,7 @@ class _DevicesPageState extends State<DevicesPage> {
             shape: CircleBorder(
               side: BorderSide(
                 color: Colors.white,
-                width: 6.0,
+                width: borderSize,
               ),
             ),
             onPressed: () => navigateTo(context, WizardPage()),
