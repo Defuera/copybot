@@ -2,11 +2,10 @@ import 'dart:math';
 
 import 'package:bot/common/models/device.dart';
 import 'package:bot/common/theme.dart';
-import 'package:bot/common/utils/navigation_utils.dart';
 import 'package:bot/devices/devices_bloc.dart';
-import 'package:bot/devices/fancy_background.dart';
-import 'package:bot/new_device_wizard/wizard_page.dart';
-import 'package:bot/profile/profile_page.dart';
+import 'package:bot/devices/widgets/add_device_floating_button.dart';
+import 'package:bot/devices/widgets/fancy_background.dart';
+import 'package:bot/devices/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +16,7 @@ class DevicesPage extends StatefulWidget {
   _DevicesPageState createState() => _DevicesPageState();
 }
 
-class _DevicesPageState extends State<DevicesPage> {
+class _DevicesPageState extends State<DevicesPage> with SingleTickerProviderStateMixin<DevicesPage> {
   final bloc = DevicesBloc();
 
   @override
@@ -88,70 +87,10 @@ class _DevicesPageState extends State<DevicesPage> {
           style: Theme.of(context).textTheme.headline.apply(color: titleColor),
         ),
         actions: <Widget>[
-          _buildProfileButton(context, enableProfileButton),
-          _buildAddDeviceButton(context, showAddDeviceButtonBorder),
+          ProfileFloatingButton(enabled: enableProfileButton),
+          AddDeviceFloatingButton(bloc: bloc, showBorder: showAddDeviceButtonBorder),
         ],
       );
-
-  _buildProfileButton(BuildContext context, bool enable) => SizedBox(
-      width: BotDimens.actionButtonDiameter,
-      height: BotDimens.actionButtonDiameter,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 8.0),
-        child: Opacity(
-          opacity: () {
-            if (enable) {
-              return 1.0;
-            } else {
-              return 0.5;
-            }
-          }(),
-          child: FloatingActionButton(
-            heroTag: null,
-            onPressed: () {
-              if (enable) {
-                return () => Navigator.pushNamed(context, ProfilePage.route);
-              } else {
-                return null;
-              }
-            }(),
-            tooltip: 'Increment',
-            child: Icon(
-              Icons.person_outline,
-              color: BotColors.orange,
-            ),
-            backgroundColor: Colors.white,
-          ),
-        ),
-      ));
-
-  _buildAddDeviceButton(BuildContext context, bool showBorder) {
-    final borderSize = () {
-      if (showBorder)
-        return 6.0;
-      else
-        return 0.0;
-    }(); //todo animate
-    return SizedBox(
-        width: BotDimens.actionButtonDiameter + borderSize,
-        height: BotDimens.actionButtonDiameter + borderSize,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: FloatingActionButton(
-            heroTag: null,
-            shape: CircleBorder(
-              side: BorderSide(
-                color: Colors.white,
-                width: borderSize,
-              ),
-            ),
-            onPressed: () => navigateTo(context, WizardPage()),
-            tooltip: 'Increment',
-            child: Icon(Icons.add),
-            backgroundColor: BotColors.orange,
-          ),
-        ));
-  }
 
   _buildCancelButton(BuildContext context) {
     var degreesInRadian45 = pi / 4.0;

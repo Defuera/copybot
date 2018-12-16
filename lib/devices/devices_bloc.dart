@@ -11,12 +11,15 @@ class DevicesBloc extends Bloc<Event, ViewModel> {
       case Event.HIDE_ADD_DEVICE_REVEAL:
         yield ViewModel(showAddDevicesReveal: false);
         break;
+      case Event.SHOW_ADD_DEVICE_REVEAL:
+        yield ViewModel(showAddDevicesReveal: true);
+        break;
 //      case Event.NAVIGATE_TO_PROFILE:
 //        break;
 //      case Event.NAVIGATE_TO_ADD_DEVICE:
 //        break;
       default:
-        throw Exception("unkown error");
+        throw Exception("unkown state");
     }
   }
 }
@@ -30,6 +33,7 @@ class ViewModel {
 
 enum Event {
   HIDE_ADD_DEVICE_REVEAL,
+  SHOW_ADD_DEVICE_REVEAL,
 //  NAVIGATE_TO_PROFILE,
 //  NAVIGATE_TO_ADD_DEVICE
 }
