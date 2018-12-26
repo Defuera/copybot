@@ -10,12 +10,12 @@ class ProfileFloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: SizedBox(
         width: BotDimens.actionButtonDiameter,
         height: BotDimens.actionButtonDiameter,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: Opacity(
+        child: Opacity(
             opacity: () {
               if (enabled) {
                 return 1.0;
@@ -39,6 +39,7 @@ class ProfileFloatingButton extends StatelessWidget {
               backgroundColor: Colors.white,
             ),
           ),
-        ));
+      ),
+    );
   }
 }

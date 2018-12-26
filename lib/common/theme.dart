@@ -14,7 +14,7 @@ class BotColors {
 }
 
 class BotDimens {
-  static final actionButtonDiameter = 48.0;
+  static final actionButtonDiameter = 44.0;
 }
 
 final textTheme = TextTheme(
