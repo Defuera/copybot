@@ -39,21 +39,11 @@ class _AddDeviceFloatingButtonState extends State<AddDeviceFloatingButton>
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
-    //original code
-//    animation = Tween(begin: 0.0, end: 1.0).animate(controller);
-
-    //CurvedAnimation attempt
-//    final Animation curve = CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
-//    animation = Tween(begin: 0.0, end: 1.0).animate(curve);
-
-    //
-//    animation = Tween(begin: 1.0, end: 0.0).animate(controller);
+    controller = AnimationController(duration: const Duration(milliseconds: 4000), vsync: this);
     animation = CurveTween(curve: MyCurve()).animate(controller);
-
-
-
-    _startAnimation();
+    if (showBorder){
+      _startAnimation();
+    }
   }
 
   void _startAnimation() {
@@ -80,6 +70,7 @@ class _AddDeviceFloatingButtonImpl extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     final borderSize = _getBorderSize();
+    print('animation value: ${animation.value}');
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Container(
