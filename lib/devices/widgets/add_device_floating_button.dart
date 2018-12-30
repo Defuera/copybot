@@ -60,7 +60,7 @@ class _AddDeviceFloatingButtonState extends State<AddDeviceFloatingButton>
 }
 
 class _AddDeviceFloatingButtonImpl extends AnimatedWidget {
-  final Bloc bloc;
+  final DevicesBloc bloc;
   final bool showBorder;
   final Animation animation;
   final maxBorderSize = 26.0;
@@ -70,7 +70,7 @@ class _AddDeviceFloatingButtonImpl extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     final borderSize = _getBorderSize();
-    print('animation value: ${animation.value}');
+//    print('animation value: ${animation.value}');
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Container(
@@ -84,7 +84,7 @@ class _AddDeviceFloatingButtonImpl extends AnimatedWidget {
           child: FloatingActionButton(
             heroTag: null,
 //            onPressed: () => navigateTo(context, WizardPage()),
-            onPressed: () => bloc.dispatch(Event.SHOW_ADD_DEVICE_REVEAL),
+            onPressed: bloc.showReveal,
             child: ClipOval(
               child: Container(
                 alignment: Alignment.center,

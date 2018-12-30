@@ -17,8 +17,7 @@ class DevicesPage extends StatefulWidget {
   _DevicesPageState createState() => _DevicesPageState();
 }
 
-class _DevicesPageState extends State<DevicesPage>
-    with SingleTickerProviderStateMixin<DevicesPage> {
+class _DevicesPageState extends State<DevicesPage> with SingleTickerProviderStateMixin<DevicesPage> {
   final bloc = DevicesBloc();
 
   @override
@@ -36,8 +35,7 @@ class _DevicesPageState extends State<DevicesPage>
 
   Widget _buildDefaultState(BuildContext context, List<Device> devices) {
     return Scaffold(
-        appBar: _buildAppBar(context,
-            title: "My devices", titleColor: Colors.black),
+        appBar: _buildAppBar(context, title: "My devices", titleColor: Colors.black),
         body: Column(children: <Widget>[
           Image.asset("assets/images/list_empty.png"),
           Align(
@@ -93,46 +91,43 @@ class _DevicesPageState extends State<DevicesPage>
         ),
         actions: <Widget>[
           ProfileFloatingButton(enabled: enableProfileButton),
-          AddDeviceFloatingButton(
-              bloc: bloc, showBorder: showAddDeviceButtonBorder),
+          AddDeviceFloatingButton(bloc: bloc, showBorder: showAddDeviceButtonBorder),
         ],
       );
 
-  FancyButtonWrapper _buildCancelFab(BuildContext context) =>
-      FancyButtonWrapper(
-          color: Colors.blueAccent,
-          child: FloatingActionButton(
-            onPressed: () => bloc.dispatch(Event.HIDE_ADD_DEVICE_REVEAL),
-            backgroundColor: Colors.white,
-            child: Transform.rotate(
-              angle: pi / 4,
-              child: Icon(
-                Icons.add,
-                size: 38.0,
-                color: BotColors.orange,
-              ),
-            ),
-          ));
+  FancyButtonWrapper _buildCancelFab(BuildContext context) => FancyButtonWrapper(
+      color: Colors.blueAccent,
+      child: FloatingActionButton(
+        onPressed: bloc.hideReveal,
+        backgroundColor: Colors.white,
+        child: Transform.rotate(
+          angle: pi / 4,
+          child: Icon(
+            Icons.add,
+            size: 38.0,
+            color: BotColors.orange,
+          ),
+        ),
+      ));
 
-  FancyButtonWrapper _buildCancelTextButton(BuildContext context) =>
-      FancyButtonWrapper(
-          color: Colors.blueAccent,
-          child: InkWell(
-            onTap: () => bloc.dispatch(Event.HIDE_ADD_DEVICE_REVEAL),
-            child: Container(
-              alignment: Alignment.center,
-              height: 50,
-              width: 150,
-              decoration: BoxDecoration(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(90),
-              ),
-              child: Center(
-                child: Text(
-                  'press me',
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
-              ),
+  FancyButtonWrapper _buildCancelTextButton(BuildContext context) => FancyButtonWrapper(
+      color: Colors.blueAccent,
+      child: InkWell(
+        onTap:  bloc.hideReveal,
+        child: Container(
+          alignment: Alignment.center,
+          height: 50,
+          width: 150,
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.circular(90),
+          ),
+          child: Center(
+            child: Text(
+              'press me',
+              style: TextStyle(color: Colors.white, fontSize: 14),
             ),
-          ));
+          ),
+        ),
+      ));
 }

@@ -1,17 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:bot/common/models/device.dart';
 
-class DevicesBloc extends Bloc<Event, ViewModel> {
+class DevicesBloc extends Bloc<_Event, ViewModel> {
   @override
   get initialState => ViewModel(showAddDevicesReveal: true);
 
   @override
-  Stream<ViewModel> mapEventToState(ViewModel viewModel, Event event) async* {
+  Stream<ViewModel> mapEventToState(ViewModel viewModel, _Event event) async* {
     switch (event) {
-      case Event.HIDE_ADD_DEVICE_REVEAL:
+      case _Event.HIDE_ADD_DEVICE_REVEAL:
         yield ViewModel(showAddDevicesReveal: false);
         break;
-      case Event.SHOW_ADD_DEVICE_REVEAL:
+      case _Event.SHOW_ADD_DEVICE_REVEAL:
         yield ViewModel(showAddDevicesReveal: true);
         break;
 //      case Event.NAVIGATE_TO_PROFILE:
@@ -22,6 +22,10 @@ class DevicesBloc extends Bloc<Event, ViewModel> {
         throw Exception("unkown state");
     }
   }
+
+  void hideReveal() => dispatch(_Event.HIDE_ADD_DEVICE_REVEAL);
+
+  void showReveal() => dispatch(_Event.SHOW_ADD_DEVICE_REVEAL);
 }
 
 class ViewModel {
@@ -31,7 +35,7 @@ class ViewModel {
   ViewModel({this.showAddDevicesReveal, this.devices});
 }
 
-enum Event {
+enum _Event {
   HIDE_ADD_DEVICE_REVEAL,
   SHOW_ADD_DEVICE_REVEAL,
 //  NAVIGATE_TO_PROFILE,
